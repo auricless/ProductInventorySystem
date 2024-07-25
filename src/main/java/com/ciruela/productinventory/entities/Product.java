@@ -25,7 +25,7 @@ public class Product {
 	private int quantity;
 	
 	@Column(nullable = false)
-	private BigDecimal price;
+	private BigDecimal unitPrice;
 
 	@Enumerated(EnumType.STRING)
 	private ProductType type;
@@ -62,12 +62,12 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
+	public BigDecimal getUnitPrice() {
+		return unitPrice;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	public void setUnitPrice(BigDecimal unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
 	public ProductType getType() {

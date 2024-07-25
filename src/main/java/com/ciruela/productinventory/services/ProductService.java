@@ -22,12 +22,13 @@ public class ProductService {
 		return repository.findById(id);
 	}
 	
-	public void save(Product product) {
-		repository.save(product);
+	public Product save(Product product) {
+		Product savedProduct = repository.save(product);
+		return savedProduct;
 	}
 	
-	public void delete(Product product) {
-		repository.delete(product);
+	public void delete(Long id) {
+		repository.deleteById(id);
 	}
 
 }
