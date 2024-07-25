@@ -68,16 +68,16 @@ public class ProductInventorySystemRestControllerTest {
         Number id = documentContext.read("$.id");
         String name = documentContext.read("$.name");
         String description = documentContext.read("$.description");
-        ProductType type = documentContext.read("$.type");
+        String type = documentContext.read("$.type");
         int quantity = documentContext.read("$.quantity");
-        BigDecimal unitPrice = documentContext.read("$.unitPrice");
+        Double unitPrice = documentContext.read("$.unitPrice");
 
         assertThat(id).isNotNull();
         assertThat(name).isEqualTo("Product-1");
         assertThat(description).isEqualTo("Description-1");
-        assertThat(type).isEqualTo(ProductType.APPLIANCE);
+        assertThat(type).isEqualTo(ProductType.APPLIANCE.toString());
         assertThat(quantity).isEqualTo(5);
-        assertThat(unitPrice).isEqualTo(BigDecimal.valueOf(49.99));
+        assertThat(BigDecimal.valueOf(unitPrice)).isEqualTo(BigDecimal.valueOf(49.99));
     }
     
     @Test
@@ -90,7 +90,7 @@ public class ProductInventorySystemRestControllerTest {
     	updatedProduct.setUnitPrice(BigDecimal.valueOf(69.99));
 
         HttpEntity<Product> request = new HttpEntity<>(updatedProduct);
-        ResponseEntity<Product> response = restTemplate.exchange("/v1/product/{id}", HttpMethod.PUT, request, Product.class, 1L);
+        ResponseEntity<String> response = restTemplate.exchange("/v1/product/{id}", HttpMethod.PUT, request, String.class, 1L);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         
@@ -98,16 +98,16 @@ public class ProductInventorySystemRestControllerTest {
         Number id = documentContext.read("$.id");
         String name = documentContext.read("$.name");
         String description = documentContext.read("$.description");
-        ProductType type = documentContext.read("$.type");
+        String type = documentContext.read("$.type");
         int quantity = documentContext.read("$.quantity");
-        BigDecimal unitPrice = documentContext.read("$.unitPrice");
+        Double unitPrice = documentContext.read("$.unitPrice");
 
         assertThat(id).isNotNull();
         assertThat(name).isEqualTo("Product-Updated");
         assertThat(description).isEqualTo("Description-Updated");
-        assertThat(type).isEqualTo(ProductType.ELECTRONIC);
+        assertThat(type).isEqualTo(ProductType.ELECTRONIC.toString());
         assertThat(quantity).isEqualTo(7);
-        assertThat(unitPrice).isEqualTo(BigDecimal.valueOf(69.99));
+        assertThat(BigDecimal.valueOf(unitPrice)).isEqualTo(BigDecimal.valueOf(69.99));
     }
     
     @Test
